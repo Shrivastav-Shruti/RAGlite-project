@@ -1,57 +1,57 @@
 # Core dependencies
-streamlit==1.32.2
-langchain==0.0.350
-langchain-community==0.0.27
-chromadb==0.4.24
-sentence-transformers==2.2.2
-python-dotenv==1.0.0
-groq==0.4.2
+streamlit
+langchain
+langchain-community
+chromadb
+sentence-transformers
+python-dotenv
+groq
 
 # Document processing
-python-docx==1.1.0
-PyPDF2==3.0.1
+python-docx
+PyPDF2
 
 # Database
-pysqlite3-binary>=0.5.4
+pysqlite3-binary
 
 # Scientific Computing
-numpy==1.24.3
-scipy==1.11.4
-pandas==2.0.3
+numpy
+scipy
+pandas
 
 # ML & Transformers
-torch==2.0.1
-torchvision==0.15.2
-transformers==4.30.2
-huggingface-hub==0.20.1
-tokenizers==0.13.3
-safetensors==0.3.3
+torch
+torchvision
+transformers
+huggingface-hub
+tokenizers
+safetensors
 
 # API and HTTP
-requests==2.31.0
-httpx==0.24.1
-aiohttp==3.8.5
-async-timeout==4.0.3
+requests
+httpx
+aiohttp
+async-timeout
 
 # Utilities
-tqdm==4.66.2
-typing-extensions==4.7.1
-coloredlogs==15.0.1
-pyyaml==6.0.1
-psutil==5.9.5
+tqdm
+typing-extensions
+coloredlogs
+pyyaml
+psutil
 
 # Compatibility requirements
-pydantic==1.10.13
-typing-inspect==0.9.0
-mypy-extensions==1.0.0
-packaging==23.2
-dataclasses-json==0.5.14
-tenacity==8.2.3
-jinja2==3.1.2
-jsonpatch==1.33
+pydantic
+typing-inspect
+mypy-extensions
+packaging
+dataclasses-json
+tenacity
+jinja2
+jsonpatch
 
 # Additional ChromaDB dependencies
-onnxruntime==1.16.3
-chroma-hnswlib==0.7.3
-fastapi==0.109.1
-uvicorn==0.27.0.post1
+onnxruntime
+chroma-hnswlib
+fastapi
+uvicorn
