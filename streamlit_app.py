@@ -6,6 +6,12 @@ import os
 import sys
 from pathlib import Path
 
+# Add compatibility fixes for Python 3.13
+import typing
+if not hasattr(typing, "ParamSpec"):
+    from typing_extensions import ParamSpec
+    setattr(typing, "ParamSpec", ParamSpec)
+
 # Add the RAG directory to Python path
 repo_root = Path(__file__).parent
 rag_path = repo_root / "RAG"
