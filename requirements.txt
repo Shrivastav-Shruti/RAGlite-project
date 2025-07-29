@@ -1,42 +1,51 @@
 # Core dependencies
-streamlit==1.32.2
-langchain==0.0.350
-langchain-community==0.0.27
-chromadb==0.4.24
-sentence-transformers==2.2.2
-python-dotenv==1.0.0
-groq==0.4.2
+streamlit
+langchain
+langchain-community
+chromadb
+sentence-transformers
+python-dotenv
+groq
 
 # Document processing
-python-docx==1.1.0
-PyPDF2==3.0.1
+python-docx
+PyPDF2
 
 # Database
-pysqlite3-binary>=0.5.4
+pysqlite3-binary
+
+# Scientific Computing
+numpy
+scipy
+pandas
+
+# ML & Transformers
+torch
+torchvision
+transformers
+huggingface-hub
+tokenizers
+safetensors
+
+# API and HTTP
+requests
+httpx
+aiohttp
+async-timeout
 
 # Utilities
-requests==2.31.0
-typing-extensions>=4.7.1,<5.0.0
-numpy>=1.24.0,<2.0.0
 tqdm==4.66.2
-coloredlogs==15.0.1
-httpx==0.24.1
+typing-extensions
+coloredlogs
+pyyaml
+psutil
 
 # Compatibility requirements
-pydantic==1.10.13
-typing-inspect>=0.8.0
-mypy-extensions>=1.0.0
-packaging>=23.0
-aiohttp>=3.8.0,<4.0.0
-dataclasses-json==0.5.14
-tenacity>=8.1.0
-async-timeout>=4.0.0
-jinja2>=3.0.0
-jsonpatch>=1.33,<2.0
-
-# ML dependencies
-torch>=2.0.0,<3.0.0
-transformers>=4.30.0,<5.0.0
-safetensors>=0.3.0
-tokenizers>=0.13.0
-huggingface-hub>=0.20.0
+pydantic
+typing-inspect
+mypy-extensions
+packaging
+dataclasses-json
+tenacity
+jinja2
+jsonpatch
