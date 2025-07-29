@@ -1,9 +1,34 @@
 [server]
-fileWatcherType = "none"  # Disable file watcher to avoid inotify issues
-maxUploadSize = 200  # Increase max upload size to 200MB
+# Disable file watcher to avoid inotify issues
+fileWatcherType = "none"
+# Increase max upload size to 200MB
+maxUploadSize = 200
+# Run on all interfaces
+address = "0.0.0.0"
+# Enable CORS for all origins
+enableCORS = true
+# Enable xsrf protection
+enableXsrfProtection = true
+# Enable websocket compression
+enableWebsocketCompression = true
+
+[browser]
+# Don't automatically open browser
+serverAddress = "0.0.0.0"
+gatherUsageStats = false
 
 [theme]
+# Modern dark theme
 primaryColor = "#10a37f"
 backgroundColor = "#343541"
 secondaryBackgroundColor = "#40414f"
-textColor = "#ffffff" 
+textColor = "#ffffff"
+
+[logger]
+# Set logging level
+level = "info"
+
+[client]
+# Increase timeout for long-running operations
+toolbarMode = "minimal"
+showErrorDetails = true 
