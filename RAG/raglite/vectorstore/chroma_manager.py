@@ -13,14 +13,6 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# SQLite compatibility fix
-try:
-    import pysqlite3
-    sys.modules['sqlite3'] = pysqlite3
-    logger.info("Using pysqlite3 for better SQLite compatibility")
-except ImportError:
-    logger.warning("pysqlite3 not available, using default sqlite3")
-
 try:
     import chromadb
     from chromadb.config import Settings

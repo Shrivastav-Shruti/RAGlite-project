@@ -2,7 +2,7 @@
 streamlit
 langchain
 langchain-community
-chromadb==0.4.22
+chromadb>=0.4.22,<0.5.0
 sentence-transformers
 python-dotenv
 groq
@@ -10,9 +10,6 @@ groq
 # Document processing
 python-docx
 PyPDF2
-
-# Database
-pysqlite3-binary
 
 # Scientific Computing
 numpy
