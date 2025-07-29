@@ -15,14 +15,16 @@ pysqlite3-binary>=0.5.4
 # Utilities
 requests==2.31.0
 typing-extensions==4.9.0
-pydantic==2.6.1
 numpy==1.26.4
 tqdm==4.66.2
 coloredlogs==15.0.1
 httpx==0.28.1
 
-# Optional dependencies
-torch>=2.0.0
-transformers>=4.30.0
-safetensors>=0.3.0
-tokenizers>=0.13.0
+# Downgrade pydantic for Python 3.13 compatibility
+pydantic>=1.10.0,<2.0.0
+
+# Optional dependencies - comment out to reduce build complexity
+# torch>=2.0.0
+# transformers>=4.30.0
+# safetensors>=0.3.0
+# tokenizers>=0.13.0
