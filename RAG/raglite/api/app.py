@@ -350,8 +350,26 @@ def load_embedding_model():
 def initialize_chroma_manager():
     """Initialize and cache ChromaDB manager."""
     try:
+        # Import directly to ensure ChromaDB is available
+        import chromadb
         from raglite import ChromaManager
-        return ChromaManager(persist_directory="./data/chroma_db")
+        
+        # Create the ChromaManager with a specific path
+        chroma_path = os.path.abspath("./data/chroma_db")
+        logger.info(f"Initializing ChromaDB at path: {chroma_path}")
+        
+        return ChromaManager(persist_directory=chroma_path)
+    except ImportError as e:
+        st.error(f"Failed to import ChromaDB: {e}")
+        st.info("Installing ChromaDB...")
+        os.system("pip install chromadb")
+        try:
+            import chromadb
+            from raglite import ChromaManager
+            return ChromaManager(persist_directory="./data/chroma_db")
+        except Exception as e:
+            st.error(f"Failed to initialize ChromaDB after installation: {e}")
+            return None
     except Exception as e:
         st.error(f"Failed to initialize ChromaDB: {e}")
         return None

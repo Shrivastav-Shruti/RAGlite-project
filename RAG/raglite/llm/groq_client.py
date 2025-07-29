@@ -49,14 +49,13 @@ class GroqClient:
                 "Groq API key is required. Set GROQ_API_KEY environment variable or pass api_key parameter."
             )
         
-        # Update the model and API endpoint
         # Get model from environment variable or use default
-        self.model = model or os.getenv("LLM_MODEL", "meta-llama/llama-4-maverick-17b-128e-instruct")
+        self.model = model or os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.timeout = timeout
         
-        self.base_url = "https://api.groq.com/openai/v1"  # Correct OpenAI-compatible endpoint
+        self.base_url = "https://api.groq.com/openai/v1"
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
