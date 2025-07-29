@@ -6,58 +6,68 @@ Handles vector storage and similarity search using ChromaDB.
 
 import sys
 import sqlite3
-try:
-    import pysqlite3
-    sys.modules['sqlite3'] = pysqlite3
-except ImportError:
-    pass
-
-import os
 import logging
-import uuid
+import os
+from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 from datetime import datetime
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# SQLite compatibility fix
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+    logger.info("Using pysqlite3 for better SQLite compatibility")
+except ImportError:
+    logger.warning("pysqlite3 not available, using default sqlite3")
 
 try:
     import chromadb
     from chromadb.config import Settings
     from chromadb.api import API as ChromaAPI
     from chromadb.api.models.Collection import Collection
-except ImportError:
+except ImportError as e:
+    logger.error(f"Failed to import ChromaDB: {e}")
     chromadb = None
     ChromaAPI = None
     Collection = None
 
-# Set up logging
-logger = logging.getLogger(__name__)
-
-
 class ChromaManager:
-    """ChromaDB vector store manager."""
+    """Manages interactions with ChromaDB vector store."""
     
     def __init__(self, persist_directory: str = "./data/chroma_db"):
-        """Initialize ChromaDB manager."""
-        if not chromadb:
-            raise ImportError("ChromaDB is not installed. Please install it with 'pip install chromadb'")
-        
-        self.persist_directory = persist_directory
-        os.makedirs(persist_directory, exist_ok=True)
-        
-        # Initialize ChromaDB with settings
-        self.client = chromadb.PersistentClient(
-            path=persist_directory,
-            settings=Settings(
-                anonymized_telemetry=False,
-                allow_reset=True
+        """Initialize ChromaDB with the specified persistence directory."""
+        try:
+            # Ensure persist directory exists
+            persist_directory = os.path.abspath(persist_directory)
+            os.makedirs(persist_directory, exist_ok=True)
+            logger.info(f"Using ChromaDB persist directory: {persist_directory}")
+            
+            # Initialize ChromaDB client with settings
+            self.client = chromadb.PersistentClient(
+                path=persist_directory,
+                settings=Settings(
+                    anonymized_telemetry=False,
+                    allow_reset=True,
+                    is_persistent=True
+                )
             )
-        )
-        
-        # Get or create the collection
-        self.collection = self.client.get_or_create_collection(
-            name="documents",
-            metadata={"hnsw:space": "cosine"}
-        )
+            
+            # Get or create the default collection
+            self.collection = self.client.get_or_create_collection(
+                name="documents",
+                metadata={"hnsw:space": "cosine"}
+            )
+            
+            logger.info("ChromaDB initialized successfully")
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize ChromaDB: {e}")
+            raise RuntimeError(f"ChromaDB initialization failed: {e}")
 
     def add_documents(self, documents: List[Dict[str, Any]]) -> None:
         """Add documents to the vector store."""
