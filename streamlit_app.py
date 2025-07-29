@@ -5,13 +5,23 @@ RAGLite Streamlit Application Entry Point
 import os
 import sys
 from pathlib import Path
-import streamlit as st
-import subprocess
 import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# SQLite compatibility fix - MUST BE BEFORE ANY OTHER IMPORTS
+try:
+    import pysqlite3
+    # Replace sqlite3 with pysqlite3 in sys.modules
+    sys.modules['sqlite3'] = pysqlite3
+    logger.info("Using pysqlite3 for better SQLite compatibility")
+except ImportError:
+    logger.warning("pysqlite3 not available, using default sqlite3 - this may cause issues")
+
+import streamlit as st
+import subprocess
 
 # Add compatibility fixes for Python 3.13
 import typing
@@ -49,14 +59,6 @@ def install_chromadb():
 
 # Try importing ChromaDB
 try:
-    # First try importing pysqlite3 for SQLite compatibility
-    try:
-        import pysqlite3
-        sys.modules['sqlite3'] = pysqlite3
-        logger.info("Using pysqlite3 for better SQLite compatibility")
-    except ImportError:
-        logger.warning("pysqlite3 not available, using default sqlite3")
-    
     # Now try importing ChromaDB
     import chromadb
     from chromadb.config import Settings
