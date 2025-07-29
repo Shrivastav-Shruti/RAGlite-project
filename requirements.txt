@@ -1,54 +1,52 @@
-# Core dependencies
-streamlit
+# Core RAG Framework Dependencies
 langchain
 langchain-community
-chromadb>=0.4.22,<0.5.0
-sentence-transformers
-python-dotenv
-groq
+chromadb
+pysqlite3-binary>=0.5.0  # For ChromaDB compatibility with older SQLite versions
 
-# Document processing
-python-docx
+# Sentence Transformers with compatible versions
+sentence-transformers
+transformers
+huggingface-hub
+
+# Document Processing
 PyPDF2
+python-docx
+
+# Web Interface
+streamlit
+
+# API and HTTP
+requests
 
 # Scientific Computing
 numpy
 scipy
+
+# Data Manipulation
 pandas
 
-# ML & Transformers
-torch
-torchvision
-transformers
-huggingface-hub
-tokenizers
-safetensors
-
-# API and HTTP
-requests
-httpx
-aiohttp
-async-timeout
-
-# Utilities
-tqdm
-typing-extensions
-coloredlogs
-pyyaml
+# Benchmarking and System Monitoring
 psutil
 
-# Compatibility requirements
-pydantic<2.0.0
-typing-inspect
-mypy-extensions
-packaging
-dataclasses-json
-tenacity
-jinja2
-jsonpatch
+# Logging and Configuration
+pyyaml
+python-dotenv
 
-# Additional ChromaDB dependencies
-onnxruntime
-chroma-hnswlib
-fastapi
-uvicorn
+# Development and Testing (Optional)
+pytest
+pytest-cov
+black
+flake8
+
+# Additional Utilities
+tqdm
+typing-extensions
+
+# PyTorch (compatible versions)
+torch
+torchvision
+
+# Additional dependencies for sentence-transformers
+tokenizers
+safetensors
