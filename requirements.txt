@@ -1,25 +1,25 @@
 # Core RAG Framework Dependencies
 langchain
 langchain-community
-chromadb
+chromadb==0.4.24
 
 # Sentence Transformers with compatible versions
-sentence-transformers
+sentence-transformers==2.5.1
 transformers
 huggingface-hub
 
 # Document Processing
-PyPDF2
-python-docx
+PyPDF2==3.0.1
+python-docx==1.1.0
 
 # Web Interface
-streamlit
+streamlit==1.32.2
 
 # API and HTTP
-requests
+requests==2.31.0
 
 # Scientific Computing
-numpy
+numpy==1.26.4
 scipy
 
 # Data Manipulation
@@ -30,7 +30,7 @@ psutil
 
 # Logging and Configuration
 pyyaml
-python-dotenv
+python-dotenv==1.0.1
 
 # Development and Testing (Optional)
 pytest
@@ -39,8 +39,8 @@ black
 flake8
 
 # Additional Utilities
-tqdm
-typing-extensions
+tqdm==4.66.2
+typing-extensions==4.9.0
 
 # PyTorch (compatible versions)
 torch
@@ -49,3 +49,18 @@ torchvision
 # Additional dependencies for sentence-transformers
 tokenizers
 safetensors
+
+# Groq
+groq==0.4.2
+
+# Coloredlogs
+coloredlogs==15.0.1
+
+# Httpx
+httpx==0.28.1
+
+# Pydantic
+pydantic==2.6.1
+
+# Pysqlite3-binary
+pysqlite3-binary==0.5.2

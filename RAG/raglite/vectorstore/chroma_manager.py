@@ -4,8 +4,16 @@ ChromaDB manager for RAGLite.
 Handles vector storage and similarity search using ChromaDB.
 """
 
-import logging
+import sys
+import sqlite3
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass
+
 import os
+import logging
 import uuid
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
