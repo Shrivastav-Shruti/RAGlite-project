@@ -12,10 +12,8 @@ if not hasattr(typing, "ParamSpec"):
     from typing_extensions import ParamSpec
     setattr(typing, "ParamSpec", ParamSpec)
 
-# Add the RAG directory to Python path
-repo_root = Path(__file__).parent
-rag_path = repo_root / "RAG"
-sys.path.append(str(rag_path))
+# Change to RAG directory
+os.chdir(os.path.join(os.path.dirname(__file__), 'RAG'))
 
 # Import and run the main app
 try:
