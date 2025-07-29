@@ -2,7 +2,7 @@
 streamlit
 langchain
 langchain-community
-chromadb
+chromadb==0.4.22
 sentence-transformers
 python-dotenv
 groq
@@ -41,7 +41,7 @@ pyyaml
 psutil
 
 # Compatibility requirements
-pydantic
+pydantic<2.0.0
 typing-inspect
 mypy-extensions
 packaging

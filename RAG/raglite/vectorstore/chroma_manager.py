@@ -1,8 +1,4 @@
-"""
-ChromaDB manager for RAGLite.
-
-Handles vector storage and similarity search using ChromaDB.
-"""
+"""ChromaDB Vector Store Manager"""
 
 import sys
 import sqlite3
@@ -28,19 +24,19 @@ except ImportError:
 try:
     import chromadb
     from chromadb.config import Settings
-    from chromadb.api import API as ChromaAPI
-    from chromadb.api.models.Collection import Collection
+    logger.info(f"ChromaDB version: {chromadb.__version__}")
 except ImportError as e:
     logger.error(f"Failed to import ChromaDB: {e}")
     chromadb = None
-    ChromaAPI = None
-    Collection = None
 
 class ChromaManager:
     """Manages interactions with ChromaDB vector store."""
     
     def __init__(self, persist_directory: str = "./data/chroma_db"):
         """Initialize ChromaDB with the specified persistence directory."""
+        if not chromadb:
+            raise ImportError("ChromaDB is not installed. Please install it with 'pip install chromadb'")
+            
         try:
             # Ensure persist directory exists
             persist_directory = os.path.abspath(persist_directory)
