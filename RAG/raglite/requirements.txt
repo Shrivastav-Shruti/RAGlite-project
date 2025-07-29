@@ -2,6 +2,7 @@
 langchain
 langchain-community
 chromadb
+pysqlite3-binary>=0.5.0  # For ChromaDB compatibility with older SQLite versions
 
 # Sentence Transformers with compatible versions
 sentence-transformers

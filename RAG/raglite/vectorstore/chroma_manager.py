@@ -10,7 +10,19 @@ import uuid
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 
+# Add SQLite version handling for ChromaDB
 try:
+    # Try to use pysqlite3 if available (for environments with older SQLite)
+    import platform
+    if platform.system() != "Darwin":  # Skip on macOS where it's usually not needed
+        try:
+            import pysqlite3
+            import sys
+            sys.modules["sqlite3"] = pysqlite3
+            print("Using pysqlite3 instead of sqlite3 for ChromaDB compatibility")
+        except ImportError:
+            print("pysqlite3 not available, using system sqlite3")
+
     import chromadb
     from chromadb.config import Settings
 except ImportError:
