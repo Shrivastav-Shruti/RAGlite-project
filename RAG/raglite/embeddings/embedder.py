@@ -17,6 +17,8 @@ class EmbeddingModel:
         try:
             from sentence_transformers import SentenceTransformer
             
+            self.model_name = model_name
+            
             # Get model path - check if it exists locally first
             model_path = os.path.join("models", model_name.replace("/", "--"))
             if os.path.exists(model_path):
@@ -51,9 +53,33 @@ class EmbeddingModel:
     
     def get_model_info(self) -> dict:
         """Get information about the embedding model."""
-        return {
-            "model_name": self.model.get_config_dict().get("model_name", "Unknown"),
-            "embedding_dimension": self.embedding_dimension,
-            "max_seq_length": self.model.get_max_seq_length(),
-            "device": str(self.model.device)
-        } 
+        try:
+            # Get basic model info
+            info = {
+                "model_name": self.model_name,
+                "embedding_dimension": self.embedding_dimension,
+                "max_seq_length": getattr(self.model, 'max_seq_length', 512),  # Default to 512 if not available
+                "device": str(self.model.device)
+            }
+            
+            # Try to get additional model configuration if available
+            try:
+                if hasattr(self.model, 'config'):
+                    config = self.model.config
+                    info.update({
+                        "model_type": getattr(config, 'model_type', 'unknown'),
+                        "vocab_size": getattr(config, 'vocab_size', 'unknown'),
+                        "hidden_size": getattr(config, 'hidden_size', 'unknown')
+                    })
+            except Exception:
+                pass  # Ignore if additional config info is not available
+                
+            return info
+            
+        except Exception as e:
+            logger.warning(f"Error getting complete model info: {e}")
+            # Return basic info if detailed info retrieval fails
+            return {
+                "model_name": self.model_name,
+                "embedding_dimension": self.embedding_dimension
+            } 
