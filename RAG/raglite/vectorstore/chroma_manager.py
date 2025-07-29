@@ -1,7 +1,6 @@
 """ChromaDB Vector Store Manager"""
 
 import sys
-import sqlite3
 import logging
 import os
 from pathlib import Path
@@ -13,9 +12,21 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Import pysqlite3 and replace sqlite3 module for ChromaDB compatibility
+try:
+    import pysqlite3
+    # Replace sqlite3 with pysqlite3 in sys.modules
+    sys.modules['sqlite3'] = pysqlite3
+    logger.info("Using pysqlite3 for better SQLite compatibility")
+except ImportError:
+    logger.warning("pysqlite3 not available, using default sqlite3 - this may cause issues")
+    import sqlite3
+
+# Import ChromaDB
 try:
     import chromadb
     from chromadb.config import Settings
+    from chromadb.types import Collection
     logger.info(f"ChromaDB version: {chromadb.__version__}")
 except ImportError as e:
     logger.error(f"Failed to import ChromaDB: {e}")
