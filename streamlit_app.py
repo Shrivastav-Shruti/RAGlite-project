@@ -19,9 +19,15 @@ if not hasattr(typing, "ParamSpec"):
     from typing_extensions import ParamSpec
     setattr(typing, "ParamSpec", ParamSpec)
 
-# Change to RAG directory and add to Python path
-os.chdir(os.path.join(os.path.dirname(__file__), 'RAG'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'RAG'))
+# Get the absolute path to the RAG directory
+RAG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'RAG')
+
+# Add RAG directory to Python path
+if RAG_DIR not in sys.path:
+    sys.path.append(RAG_DIR)
+
+# Change working directory to RAG
+os.chdir(RAG_DIR)
 
 # Try importing required packages
 def install_chromadb():
