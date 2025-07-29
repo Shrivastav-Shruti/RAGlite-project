@@ -1,0 +1,9 @@
+[server]
+fileWatcherType = "none"  # Disable file watcher to avoid inotify issues
+maxUploadSize = 200  # Increase max upload size to 200MB
+
+[theme]
+primaryColor = "#10a37f"
+backgroundColor = "#343541"
+secondaryBackgroundColor = "#40414f"
+textColor = "#ffffff" 
